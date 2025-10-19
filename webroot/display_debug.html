@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <script>
+            var orientation = {"alpha":0, "beta":0, "gamma":0};
+            var calibration = {"alpha":0, "beta":0, "gamma":0};
+
+            var socket = io();
+
+            socket.on('orientation', (orientation) => {
+                window.orientation = orientation;
+                document.body.innerHTML = "";
+                document.body.innerHTML += orientation.beta - calibration.beta + "<br />";
+                document.body.innerHTML += orientation.gamma - calibration.gamma + "<br />";
+                document.body.innerHTML += orientation.alpha - calibration.alpha;
+            });
+
+            socket.on('calibrate', () => {
+                console.log('calibrated');
+                window.calibration = window.orientation;
+            });
+            
+
+
+            function degreesToRadians(angle) {
+                return (angle/180)*Math.PI;
+            }
+        </script>
+    </body>
+</html>
