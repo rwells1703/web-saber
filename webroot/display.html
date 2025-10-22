@@ -10,7 +10,7 @@
             }
 
             canvas {
-                display: block
+                display: block;
             }
 
             #startButton {
@@ -31,23 +31,28 @@
         </button>
 
         <script>
-            var orientation = {"alpha":0, "beta":0, "gamma":0};
-            var calibration = {"alpha":0, "beta":0, "gamma":0};
+            var orientation = { alpha: 0, beta: 0, gamma: 0 };
+            var calibration = { alpha: 0, beta: 0, gamma: 0 };
 
             var socket = io();
 
-            socket.on('orientation', (orientation) => {
+            socket.on("orientation", (orientation) => {
                 window.orientation = orientation;
             });
 
-            socket.on('calibrate', () => {
-                console.log('calibrated');
+            socket.on("calibrate", () => {
+                console.log("calibrated");
                 window.calibration = window.orientation;
             });
-            
+
             var scene = new THREE.Scene();
 
-            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+            var camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000,
+            );
 
             var renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -56,21 +61,34 @@
             var pivotPoint = new THREE.Object3D();
             scene.add(pivotPoint);
 
-            var gripTexture = new THREE.TextureLoader().load('textures/grip.png');
+            var gripTexture = new THREE.TextureLoader().load(
+                "textures/grip.png",
+            );
             gripTexture.magFilter = THREE.NearestFilter;
-            var gripMaterial = new THREE.MeshBasicMaterial({map: gripTexture});
+            var gripMaterial = new THREE.MeshBasicMaterial({
+                map: gripTexture,
+            });
             var gripHeight = 20;
             var gripGeometry = new THREE.CylinderGeometry(4, 4, gripHeight, 32);
             var grip = new THREE.Mesh(gripGeometry, gripMaterial);
-            grip.position.set(0, gripHeight/2, 0);
+            grip.position.set(0, gripHeight / 2, 0);
             pivotPoint.add(grip);
 
-            var bladeTexture = new THREE.TextureLoader().load('textures/blade.png');
-            var bladeMaterial = new THREE.MeshBasicMaterial({map: bladeTexture});
+            var bladeTexture = new THREE.TextureLoader().load(
+                "textures/blade.png",
+            );
+            var bladeMaterial = new THREE.MeshBasicMaterial({
+                map: bladeTexture,
+            });
             var bladeHeight = 100;
-            var bladeGeometry = new THREE.CylinderGeometry(2, 4, bladeHeight, 32);
+            var bladeGeometry = new THREE.CylinderGeometry(
+                2,
+                4,
+                bladeHeight,
+                32,
+            );
             var blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
-            blade.position.set(0, gripHeight + bladeHeight/2, 0);
+            blade.position.set(0, gripHeight + bladeHeight / 2, 0);
             pivotPoint.add(blade);
 
             camera.position.z = 100;
@@ -81,7 +99,7 @@
 
             var sound = new THREE.Audio(listener);
             var audioLoader = new THREE.AudioLoader();
-            audioLoader.load('sounds/hum.ogg', function(buffer) {
+            audioLoader.load("sounds/hum.ogg", function (buffer) {
                 sound.setBuffer(buffer);
                 sound.setLoop(true);
                 sound.setVolume(0.5);
@@ -91,9 +109,15 @@
                 requestAnimationFrame(animate);
                 renderer.render(scene, camera);
 
-                var alpha = degreesToRadians(orientation.alpha - calibration.alpha);
-                var beta = degreesToRadians(orientation.beta - calibration.beta);
-                var gamma = degreesToRadians(orientation.gamma - calibration.gamma);
+                var alpha = degreesToRadians(
+                    orientation.alpha - calibration.alpha,
+                );
+                var beta = degreesToRadians(
+                    orientation.beta - calibration.beta,
+                );
+                var gamma = degreesToRadians(
+                    orientation.gamma - calibration.gamma,
+                );
 
                 pivotPoint.rotation.x = beta;
                 pivotPoint.rotation.z = -gamma;
@@ -105,10 +129,12 @@
                 document.getElementById("startButton").remove();
             }
 
-            document.getElementById("startButton").addEventListener('click', start);
+            document
+                .getElementById("startButton")
+                .addEventListener("click", start);
 
             function degreesToRadians(angle) {
-                return (angle/180)*Math.PI;
+                return (angle / 180) * Math.PI;
             }
         </script>
     </body>

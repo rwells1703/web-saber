@@ -25,23 +25,24 @@
         </button>
 
         <script>
-
             var socket = io();
-            
-            window.addEventListener('deviceorientation', handleOrientation);
+
+            window.addEventListener("deviceorientation", handleOrientation);
 
             function handleOrientation(event) {
-                socket.emit('orientation', {"alpha":event.alpha, "beta":event.beta, "gamma":event.gamma});
-
+                socket.emit("orientation", {
+                    alpha: event.alpha,
+                    beta: event.beta,
+                    gamma: event.gamma,
+                });
             }
 
-            calibrateButton.addEventListener('click', handleCalibration);
+            calibrateButton.addEventListener("click", handleCalibration);
 
             function handleCalibration(event) {
-                socket.emit('calibrate');
+                socket.emit("calibrate");
                 document.documentElement.requestFullscreen();
             }
-
         </script>
     </body>
 </html>

@@ -5,12 +5,12 @@
     </head>
     <body>
         <script>
-            var orientation = {"alpha":0, "beta":0, "gamma":0};
-            var calibration = {"alpha":0, "beta":0, "gamma":0};
+            var orientation = { alpha: 0, beta: 0, gamma: 0 };
+            var calibration = { alpha: 0, beta: 0, gamma: 0 };
 
             var socket = io();
 
-            socket.on('orientation', (orientation) => {
+            socket.on("orientation", (orientation) => {
                 window.orientation = orientation;
 
                 document.body.innerHTML = `
@@ -20,15 +20,13 @@
                 `;
             });
 
-            socket.on('calibrate', () => {
-                console.log('calibrated');
+            socket.on("calibrate", () => {
+                console.log("calibrated");
                 window.calibration = window.orientation;
             });
-            
-
 
             function degreesToRadians(angle) {
-                return (angle/180)*Math.PI;
+                return (angle / 180) * Math.PI;
             }
         </script>
     </body>
