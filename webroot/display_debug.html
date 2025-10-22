@@ -12,10 +12,12 @@
 
             socket.on('orientation', (orientation) => {
                 window.orientation = orientation;
-                document.body.innerHTML = "";
-                document.body.innerHTML += orientation.beta - calibration.beta + "<br />";
-                document.body.innerHTML += orientation.gamma - calibration.gamma + "<br />";
-                document.body.innerHTML += orientation.alpha - calibration.alpha;
+
+                document.body.innerHTML = `
+                    x (beta): ${Math.round(orientation.beta - calibration.beta)}<br>
+                    y (gamma): ${Math.round(orientation.gamma - calibration.gamma)}<br>
+                    z (alpha): ${Math.round(orientation.alpha - calibration.alpha)}
+                `;
             });
 
             socket.on('calibrate', () => {
