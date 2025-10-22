@@ -4,7 +4,7 @@ An experimental game, where you can control a lightsaber using the gryoscope in 
 
 Uses web sockets to communicate gyroscopic orientation data between phone and display.
 
-# Screenshots
+## Screenshots
 
-![Main game view](screenshots/screenshot1.png)
-![Calibration screen](screenshots/screenshot2.png)
+<img src="screenshots/screenshot1.png" alt="main game view" height="200"/>
+<img src="screenshots/screenshot2.png" alt="calibration view" height="200"/>
