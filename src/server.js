@@ -23,8 +23,8 @@ app.use("/sounds", express.static("sounds"));
 
 var server = https.createServer(
   {
-    key: fs.readFileSync("./certificates//server.key"),
-    cert: fs.readFileSync("./certificates//server.cert"),
+    key: fs.readFileSync("../certificates//server.key"),
+    cert: fs.readFileSync("../certificates//server.cert"),
   },
   app,
 );
