@@ -52,13 +52,6 @@
             var renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
-            
-            /*var texture = new THREE.TextureLoader().load('textures/tnt_side.png');
-            texture.magFilter = THREE.NearestFilter;
-            var material = new THREE.MeshBasicMaterial({map: texture});
-            var geometry = new THREE.BoxGeometry();
-            var cube = new THREE.Mesh( geometry, material );
-            scene.add(cube);*/
 
             var pivotPoint = new THREE.Object3D();
             scene.add(pivotPoint);
@@ -82,7 +75,6 @@
 
             camera.position.z = 100;
             camera.position.y = 70;
-            //camera.lookAt(0, 0, 0);
 
             var listener = new THREE.AudioListener();
             camera.add(listener);
@@ -105,12 +97,6 @@
 
                 pivotPoint.rotation.x = beta;
                 pivotPoint.rotation.z = -gamma;
-
-                /*
-                cube.rotation.x = beta;
-                cube.rotation.y = gamma;
-                cube.rotation.z = alpha;
-                */
             }
 
             function start() {
