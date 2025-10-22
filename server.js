@@ -1,7 +1,7 @@
 var express = require('express');
 var fs = require('fs')
 var https = require('https');
-var socketio = require('socket.io');
+const { Server } = require("socket.io");
 
 
 var app = express();
@@ -27,8 +27,7 @@ var server = https.createServer({
     cert: fs.readFileSync('./certificates//server.cert')
 }, app);
 
-
-var io = socketio.listen(server);
+const io = new Server(server, {});
 
 io.on('connection', (socket) => {
     console.log('user connected');
